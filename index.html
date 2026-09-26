@@ -187,14 +187,14 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 
 /* Papers */
 .papers{display:grid;gap:var(--space-3);margin-top:var(--space-4);}
-.paper{display:grid;grid-template-columns:1fr;gap:var(--space-2);align-items:center;}
+.paper{display:grid;grid-template-columns:112px minmax(0,1fr);gap:1rem;align-items:start;}
 .thumb{position:relative;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;background:var(--night-2);border:1px solid var(--line);}
 .thumb img{position:absolute;left:0;top:0;width:100%;height:115%;object-fit:cover;transform:translateY(var(--py,0));will-change:transform;}
 .thumb.contain{background:#f4f4f2;}
 .thumb.contain.dark{background:#232323;}
 .thumb.contain.white{background:#fff;}
 .thumb.contain img{object-fit:contain;height:100%;transform:none;padding:4%;}
-.paper h3{font:600 var(--fs-md)/1.35 var(--sans);letter-spacing:-.01em;}
+.paper h3{font:600 var(--fs-base)/1.4 var(--sans);letter-spacing:-.01em;}
 .paper h3 a{color:var(--ink);text-decoration:none;}
 .paper h3 a:hover{color:var(--accent);}
 .stats{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:.5rem;}
@@ -205,8 +205,11 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .cites{margin-left:.5rem;font:500 var(--fs-xs)/1 var(--mono);color:var(--muted);}
 .venue{display:inline-block;font:500 var(--fs-xs)/1 var(--mono);color:var(--accent);background:var(--accent-soft);padding:.4rem .6rem;border-radius:6px;margin-bottom:.6rem;}
 .meta{font-size:var(--fs-sm);color:var(--muted);margin-top:.35rem;}
-.paper p{color:var(--ink-2);margin-top:.5rem;max-width:60ch;}
-.paper .links{margin-top:.7rem;}
+.paper p{color:var(--ink-2);margin-top:.3rem;max-width:60ch;font-size:var(--fs-sm);}
+.paper .meta{font-size:var(--fs-xs);margin-top:.2rem;}
+.paper .venue{margin-bottom:.4rem;}
+.paper .links{font-size:var(--fs-xs);}
+.paper .links{margin-top:.45rem;}
 
 /* Patents */
 .patents{display:grid;gap:var(--space-4);}
@@ -261,8 +264,7 @@ section.block.beyond{padding-top:var(--space-4);}
    Breakpoints
    ========================================================= */
 @media (min-width: 760px){
-  .paper{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-4);}
-  .paper:nth-child(even) .thumb{order:2;}
+  .paper{grid-template-columns:220px minmax(0,1fr);gap:var(--space-3);align-items:center;}
   .cards{grid-template-columns:repeat(2,1fr);}
   .cards .card:first-child{grid-column:1 / -1;}
   .cards .card:first-child{flex-direction:row;}
@@ -413,8 +415,7 @@ section.block.beyond{padding-top:var(--space-4);}
           <h3>Gemma 4</h3>
         </div>
         <div class="f-body">
-          <p>Co-author of the Gemma 4 Technical Report. I co-design Gemma models for the Pixel Tensor SoC and I'm now working on the next generation.</p>
-          <p>My focus is cutting-edge LLM architecture design for on-device inference.</p>
+          <p>Co-author of the Gemma 4 Technical Report. I co-design cutting-edge LLM architectures for the Pixel Tensor SoC, and I'm now working on the next generation of Gemma.</p>
           <p>Lead inventor of a parallel on-device LLM evaluation framework, which shards evals across a fleet of phones, cuts 100+ hour runs to about 4 hours and gates firmware and compiler releases.</p>
           <div class="links"><a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Gemma 4 report on arXiv →</a><a href="https://www.tdcommons.org/dpubs_series/10854/" target="_blank" rel="noopener">Invention disclosure →</a></div>
         </div>
