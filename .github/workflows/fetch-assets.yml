@@ -1,0 +1,36 @@
+name: Fetch logos and thumbnails
+on:
+  push:
+    paths: [".github/workflows/fetch-assets.yml"]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        run: |
+          set +e
+          mkdir -p images/fetched
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          M=images/fetched/manifest.txt; : > $M
+          get(){ c=$(curl -sSL -A "$UA" -o "images/fetched/$1" -w "%{http_code} %{content_type} %{size_download}" "$2"); echo "$1 $c $2" >> $M; }
+          for d in google.com verkada.com uber.com cmu.edu xerox.com iitd.ac.in deepmind.google arxiv.org; do
+            n=${d//./_}
+            get "s2-$n.png" "https://www.google.com/s2/favicons?domain=$d&sz=256"
+            get "touch-$n.png" "https://$d/apple-touch-icon.png"
+            get "touchwww-$n.png" "https://www.$d/apple-touch-icon.png"
+          done
+          for v in NPzpLOPuHIg cwbkhtCsKnY 20YfxLH_APE GGFF5BwOInc; do
+            get "yt-$v-max.jpg" "https://img.youtube.com/vi/$v/maxresdefault.jpg"
+            get "yt-$v-hq.jpg" "https://img.youtube.com/vi/$v/hqdefault.jpg"
+          done
+          cat $M
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images
+          git commit -m "Fetch logos and thumbnails" || echo none
+          git push
