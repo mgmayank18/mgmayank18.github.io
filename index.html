@@ -206,17 +206,16 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 
 /* Patents */
 .patents{display:grid;gap:var(--space-4);}
-.big-count{display:flex;align-items:flex-end;gap:1.1rem;}
+.big-count{display:flex;flex-direction:column;align-items:flex-start;gap:1.1rem;}
 .big-count .n{display:inline-block;padding:0 .12em .06em 0;margin-right:-.12em;font:700 clamp(5rem,3rem + 10vw,10rem)/.8 var(--serif);letter-spacing:-.05em;background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 35%,transparent));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;}
 .big-count .lbl{display:grid;gap:.5rem;padding-bottom:.5rem;color:var(--muted);font-size:var(--fs-sm);}
+.big-count .lbl .claim{color:var(--ink-2);}
 .big-count .lbl b{color:var(--ink);font-size:var(--fs-md);font-weight:600;}
 .patent-list{display:grid;}
 .patent-list li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding-block:1.1rem;border-top:1px solid var(--line);}
 .patent-list li:last-child{border-bottom:1px solid var(--line);}
 .patent-list h3{font:600 var(--fs-base)/1.45 var(--sans);}
 .patent-list p{color:var(--ink-2);font-size:var(--fs-sm);margin-top:.3rem;max-width:62ch;}
-.patent-list p.role{margin-top:.45rem;}
-.patent-list p em{font-style:normal;font-weight:600;color:var(--ink);}
 .pn{flex:none;white-space:nowrap;font:400 var(--fs-xs)/1.6 var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;}
 
 /* Projects */
@@ -465,14 +464,16 @@ section.block.beyond{padding-top:var(--space-4);}
           <div class="lbl">
             <span class="logo"><img src="images/logos/verkada.png" alt="Verkada"></span>
             <b>U.S. patents</b>
-            <span>On-camera computer vision, granted to Verkada across 4 patent families. <a href="https://patents.google.com/?inventor=Mayank+Gupta&amp;assignee=Verkada" target="_blank" rel="noopener">View on Google Patents</a></span>
+            <span>On-camera computer vision, granted to Verkada across 4 patent families. First or second inventor on 8 of the 11.</span>
+            <span class="claim">I built these systems end to end and guided the engineers who extended them, including the full license plate stack, the object tracker used for faces, people and vehicles, and raw image capture from the sensor for hyperzooms.</span>
+            <span><a href="https://patents.google.com/?inventor=Mayank+Gupta&amp;assignee=Verkada" target="_blank" rel="noopener">View on Google Patents</a></span>
           </div>
         </div>
         <ul class="patent-list">
-          <li data-reveal><div><h3>Automatic multi-plate recognition</h3><p>Real-time recognition of multiple license plates, running entirely on the camera's vision processor. Each plate is followed as a tracklet through the video stream, and per-frame OCR reads are fused with a confidence-weighted voting table, which makes the system robust to motion blur, poor lighting and stacked or multi-line plates.</p><p class="role"><em>My role:</em> I owned the license plate stack and built it from the ground up, from detection and OCR to tracking and multi-frame fusion.</p></div><span class="pn">US 11,978,267 · 2024<br>US 12,682,663 · 2026</span></li>
-          <li data-reveal><div><h3>Automatic license plate recognition</h3><p>Motion-triggered recognition for gates and entry points. Recognition starts as soon as a vehicle moves into view, and each character is resolved by consensus across neighbouring frames, with inconsistent reads rejected.</p><p class="role"><em>My role:</em> built as part of the license plate stack I owned end to end.</p></div><span class="pn">US 11,557,133 · 2023<br>US 11,948,373 · 2024</span></li>
-          <li data-reveal><div><h3>People and vehicle analytics on the edge</h3><p>On-camera tracking of people and vehicles. Detections are linked over time using Kalman-filter motion prediction, and the resulting tracks are indexed in an on-device key-value store that the cloud queries on demand, so analytics never require uploading video.</p><p class="role"><em>My role:</em> I wrote the object tracker. It began as the tracker for license plates and became the shared tracker for faces, people and vehicles across the product.</p></div><span class="pn">US 11,594,043 · 2023<br>US 11,900,688 · 2024<br>US 12,205,380 · 2025</span></li>
-          <li data-reveal><div><h3>Hyperzoom attribute analytics on the edge</h3><p>Attribute search over high-resolution crops of people and vehicles (hyperzooms). An on-camera CNN with an inverted residual architecture and semantic segmentation extracts attributes such as clothing and vehicle color, which are stored on the device and served to the cloud through queries.</p><p class="role"><em>My role:</em> I built raw image capture straight from the sensor, which gives hyperzooms their image quality.</p></div><span class="pn">US 11,429,664 · 2022<br>US 11,586,667 · 2023<br>US 11,734,343 · 2023<br>US 12,056,183 · 2024</span></li>
+          <li data-reveal><div><h3>Automatic multi-plate recognition</h3><p>Real-time recognition of multiple license plates, running entirely on the camera's vision processor. Each plate is followed as a tracklet through the video stream, and per-frame OCR reads are fused with a confidence-weighted voting table, which makes the system robust to motion blur, poor lighting and stacked or multi-line plates.</p></div><span class="pn">US 11,978,267 · 2024<br>US 12,682,663 · 2026</span></li>
+          <li data-reveal><div><h3>Automatic license plate recognition</h3><p>Motion-triggered recognition for gates and entry points. Recognition starts as soon as a vehicle moves into view, and each character is resolved by consensus across neighbouring frames, with inconsistent reads rejected.</p></div><span class="pn">US 11,557,133 · 2023<br>US 11,948,373 · 2024</span></li>
+          <li data-reveal><div><h3>People and vehicle analytics on the edge</h3><p>On-camera tracking of people and vehicles. Detections are linked over time using Kalman-filter motion prediction, and the resulting tracks are indexed in an on-device key-value store that the cloud queries on demand, so analytics never require uploading video.</p></div><span class="pn">US 11,594,043 · 2023<br>US 11,900,688 · 2024<br>US 12,205,380 · 2025</span></li>
+          <li data-reveal><div><h3>Hyperzoom attribute analytics on the edge</h3><p>Attribute search over high-resolution crops of people and vehicles (hyperzooms). An on-camera CNN with an inverted residual architecture and semantic segmentation extracts attributes such as clothing and vehicle color, which are stored on the device and served to the cloud through queries.</p></div><span class="pn">US 11,429,664 · 2022<br>US 11,586,667 · 2023<br>US 11,734,343 · 2023<br>US 12,056,183 · 2024</span></li>
         </ul>
       </div>
     </section>
