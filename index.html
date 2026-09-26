@@ -120,7 +120,8 @@ ul,ol{margin:0;padding:0;list-style:none;}
 .portrait{float:left;width:clamp(120px,27vw,300px);aspect-ratio:1;margin:.35rem clamp(1.1rem,3vw,2.75rem) 1rem 0;border-radius:var(--radius);overflow:hidden;shape-outside:inset(0 round 14px);shape-margin:.25rem;box-shadow:0 24px 60px -24px rgba(10,30,60,.45);}
 .portrait img{width:100%;height:100%;object-fit:cover;}
 .hero h1{font:700 var(--fs-xl)/1.02 var(--serif);letter-spacing:-.025em;}
-.hero .tagline{font-size:clamp(1.15rem,1rem + .8vw,1.5rem);line-height:1.4;color:var(--ink);font-weight:500;margin-top:var(--space-2);}
+.hero .tagline{margin-top:var(--space-3);color:var(--ink-2);}
+.hero .tagline+.hero-prose{margin-top:var(--space-2);}
 .hero-prose{margin-top:var(--space-3);color:var(--ink-2);}
 .hero-prose p+p{margin-top:var(--space-2);}
 .actions{clear:both;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin-top:var(--space-4);}
@@ -135,17 +136,6 @@ ul,ol{margin:0;padding:0;list-style:none;}
 @keyframes unveil{from{clip-path:inset(0 0 100% 0 round 14px);transform:scale(1.06);}to{clip-path:inset(0 0 0 0 round 14px);transform:none;}}
 .js .hero .portrait{animation:unveil 1.1s var(--ease) both;}
 .js .hero [data-enter]{animation:rise .9s var(--ease) both;animation-delay:calc(var(--i,0) * 90ms + 150ms);}
-
-/* =========================================================
-   Statement band (scroll-lit words)
-   ========================================================= */
-.statement{background:var(--night);color:var(--night-ink);position:relative;height:220vh;margin-top:var(--space-5);}
-.statement .stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden;}
-.statement .stick::before{content:"";position:absolute;width:90vmax;height:90vmax;border-radius:50%;background:radial-gradient(closest-side,rgba(79,163,255,.18),transparent 70%);transform:scale(var(--glow-s,.6));transition:transform .1s linear;}
-.statement p{position:relative;font:700 var(--fs-display)/1.08 var(--serif);letter-spacing:-.025em;max-width:18ch;text-align:left;padding-inline:clamp(16px,4vw,32px);}
-.statement .w{color:rgba(242,244,248,var(--a,.14));transition:color .15s linear;}
-.statement .w.hl{color:rgba(79,163,255,var(--a,.14));}
-.statement .cue{position:absolute;bottom:calc(2rem + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font:500 var(--fs-xs)/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--night-muted);}
 
 /* =========================================================
    Sections
@@ -165,19 +155,26 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .logo{width:48px;height:48px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;flex:none;}
 .logo img{width:70%;height:70%;object-fit:contain;}
 .logo.fill img{width:100%;height:100%;object-fit:cover;}
-.logo.text{background:#2d2a26;color:#f3e7c9;font:700 .72rem/1 var(--sans);letter-spacing:.02em;border-color:transparent;}
 
 /* Timeline */
 .timeline{position:relative;padding-left:0;}
 .timeline .rail{position:absolute;left:23px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px;}
 .timeline .rail i{position:absolute;inset:0;background:linear-gradient(var(--accent),var(--glow));transform-origin:top;transform:scaleY(var(--fill,0));border-radius:2px;}
-.role-item{position:relative;display:grid;grid-template-columns:48px 1fr;gap:1.1rem;padding-block:var(--space-3);}
+.role-item{position:relative;display:grid;grid-template-columns:48px 1fr;gap:1.1rem;padding-block:1.1rem;}
 .role-item .logo{position:relative;z-index:1;box-shadow:0 0 0 6px var(--bg);}
 .role-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline;}
-.role-item h3{font:600 var(--fs-md)/1.3 var(--sans);letter-spacing:-.01em;}
-.role-item .org{color:var(--muted);font-size:var(--fs-sm);margin-top:.15rem;}
+.role-item h3{font:600 var(--fs-base)/1.4 var(--sans);}
+.role-item h3 .org{font-weight:400;}
+.role-item h3 .org::before{content:" · ";}
+.role-item .org{color:var(--muted);}
 .when{font:400 var(--fs-xs)/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
-.role-item p{color:var(--ink-2);max-width:var(--measure);margin-top:.5rem;}
+.role-item p{color:var(--ink-2);max-width:var(--measure);margin-top:.25rem;font-size:var(--fs-sm);}
+.sub{display:grid;gap:.45rem;margin-top:.45rem;max-width:var(--measure);}
+.sub li{display:flex;gap:.6rem;align-items:flex-start;color:var(--ink-2);font-size:var(--fs-sm);}
+.sub li:not(:has(.mini))::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin:.55rem 7px 0;}
+.mini{flex:none;width:20px;height:20px;border-radius:5px;overflow:hidden;background:#fff;border:1px solid var(--line);display:grid;place-items:center;margin-top:.15rem;}
+.mini img{width:100%;height:100%;object-fit:contain;}
+.mini.text.ibm{background:#0f62fe;color:#fff;border-color:transparent;font:700 .5rem/1 var(--sans);letter-spacing:.02em;}
 
 /* Gemma feature (cinematic card) */
 .feature{position:relative;overflow:hidden;border-radius:22px;background:var(--night);color:var(--night-ink);padding:clamp(1.5rem,4vw,3.5rem);display:grid;gap:var(--space-3);isolation:isolate;}
@@ -203,6 +200,11 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .paper h3{font:600 var(--fs-md)/1.35 var(--sans);letter-spacing:-.01em;}
 .paper h3 a{color:var(--ink);text-decoration:none;}
 .paper h3 a:hover{color:var(--accent);}
+.stats{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:.5rem;}
+.stats div{display:grid;}
+.stats b{font:700 clamp(1.8rem,1.3rem + 1.6vw,2.6rem)/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.stats span{font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-top:.35rem;}
+.cites{margin-left:.5rem;font:500 var(--fs-xs)/1 var(--mono);color:var(--muted);}
 .venue{display:inline-block;font:500 var(--fs-xs)/1 var(--mono);color:var(--accent);background:var(--accent-soft);padding:.4rem .6rem;border-radius:6px;margin-bottom:.6rem;}
 .meta{font-size:var(--fs-sm);color:var(--muted);margin-top:.35rem;}
 .paper p{color:var(--ink-2);margin-top:.5rem;max-width:60ch;}
@@ -265,9 +267,10 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
   .hero{padding-top:calc(96px + 2rem);}
   .actions{grid-template-columns:1fr 1fr;}
   .actions .btn.primary{grid-column:1 / -1;}
-  .statement{height:180vh;}
   .patent-list li{flex-direction:column;gap:.2rem;}
   .pn{text-align:left;}
+  .role-item h3 .org{display:block;font-size:var(--fs-sm);}
+  .role-item h3 .org::before{content:none;}
 }
 
 /* Reduced motion: everything visible, nothing moves */
@@ -276,9 +279,6 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
   .js [data-reveal]{opacity:1;transform:none;transition:none;}
   .js .hero .portrait,.js .hero [data-enter]{animation:none;}
   .feature::before{animation:none;}
-  .statement{height:auto;}
-  .statement .stick{position:relative;height:auto;padding-block:var(--space-5);}
-  .statement .w{--a:1 !important;}
   .thumb img{transform:none;height:100%;}
   .progress{display:none;}
 }
@@ -293,9 +293,9 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
     <a class="brand" href="#top">Mayank Gupta</a>
     <nav class="nav" aria-label="Sections">
       <a href="#top">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#research">Research</a>
+      <a href="#research">Publications</a>
       <a href="#patents">Patents</a>
+      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#beyond">Beyond work</a>
     </nav>
@@ -342,81 +342,15 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
     </section>
   </div>
 
-  <!-- ================= Statement ================= -->
-  <section class="statement" aria-label="Mission">
-    <div class="stick">
-      <p id="statement">I build artificial intelligence systems that live entirely on the edge.</p>
-      <span class="cue" aria-hidden="true">Scroll</span>
-    </div>
-  </section>
 
   <div class="container">
-
-    <!-- ================= Experience ================= -->
-    <section class="block" id="experience">
-      <div class="block-head" data-reveal>
-        <h2>Experience</h2>
-      </div>
-      <div class="timeline" id="timeline">
-        <span class="rail" aria-hidden="true"><i></i></span>
-        <ol>
-        <li class="role-item" data-reveal>
-          <span class="logo"><img src="images/logos/google.png" alt="Google"></span>
-          <div>
-            <div class="role-top"><h3>Software Engineer</h3><span class="when">Jul 2023 – Present</span></div>
-            <div class="org">Google · Bangalore</div>
-            <p>On-device LLMs for Pixel. Co-designed the Gemma 4 network for the Pixel SoC and evaluated Gemma 4 models on-device across datasets.</p>
-          </div>
-        </li>
-        <li class="role-item" data-reveal>
-          <span class="logo"><img src="images/logos/verkada.png" alt="Verkada"></span>
-          <div>
-            <div class="role-top"><h3>Computer Vision Engineer</h3><span class="when">Feb 2021 – Jul 2023</span></div>
-            <div class="org">Verkada · San Francisco Bay Area</div>
-            <p>Computer vision that runs on the camera: license plate recognition, people and vehicle analytics, and traffic tracking without cloud processing. Six U.S. patents.</p>
-          </div>
-        </li>
-        <li class="role-item" data-reveal>
-          <span class="logo fill"><img src="images/logos/uber.png" alt="Uber"></span>
-          <div>
-            <div class="role-top"><h3>Perception Intern</h3><span class="when">Summer 2020</span></div>
-            <div class="org">Uber ATG</div>
-            <p>Adversarial reinforcement learning for motion prediction.</p>
-          </div>
-        </li>
-        <li class="role-item" data-reveal>
-          <span class="logo fill"><img src="images/logos/cmu.png" alt="Carnegie Mellon University"></span>
-          <div>
-            <div class="role-top"><h3>M.S. in Computer Vision</h3><span class="when">2019 – 2020</span></div>
-            <div class="org">Carnegie Mellon University</div>
-            <p>Reinforcement learning for self-driving with Prof. Jeff Schneider, sponsored by Argo AI.</p>
-          </div>
-        </li>
-        <li class="role-item" data-reveal>
-          <span class="logo fill"><img src="images/logos/xerox.png" alt="Xerox"></span>
-          <div>
-            <div class="role-top"><h3>Research Engineer</h3><span class="when">Jul 2017 – Jul 2019</span></div>
-            <div class="org">Xerox Research Centre India</div>
-            <p>Computer vision for transportation. Vehicle occupancy detection deployed on highways in New York, San Francisco and Los Angeles.</p>
-          </div>
-        </li>
-        <li class="role-item" data-reveal>
-          <span class="logo text" aria-label="IIT Delhi">IITD</span>
-          <div>
-            <div class="role-top"><h3>B.Tech. in Electrical Engineering</h3><span class="when">2013 – 2017</span></div>
-            <div class="org">IIT Delhi</div>
-            <p>Founded IIT Delhi OnAir, the institute's broadcasting studio.</p>
-          </div>
-        </li>
-        </ol>
-      </div>
-    </section>
 
     <!-- ================= Research ================= -->
     <section class="block" id="research">
       <div class="block-head" data-reveal>
         <h2>Publications</h2>
         <p>Full list on <a href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+        <div class="stats" id="scholar-stats" hidden></div>
       </div>
 
       <article class="feature" data-reveal="zoom">
@@ -492,6 +426,59 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
           <li data-reveal><h3>Hyperzoom attribute analytics on the edge</h3><span class="pn">US 11,734,343 · 2023<br>US 12,056,183 · 2024</span></li>
           <li data-reveal><h3>People and vehicle analytics on the edge</h3><span class="pn">US 12,205,380<br>2025</span></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ================= Experience ================= -->
+    <section class="block" id="experience">
+      <div class="block-head" data-reveal>
+        <h2>Experience</h2>
+      </div>
+      <div class="timeline" id="timeline">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <ol>
+        <li class="role-item" data-reveal>
+          <span class="logo"><img src="images/logos/google.png" alt="Google"></span>
+          <div>
+            <div class="role-top"><h3>Software Engineer <span class="org">Google, Bangalore</span></h3><span class="when">Jul 2023 – Present</span></div>
+            <p>On-device AI for Pixel, including Gemma 4.</p>
+          </div>
+        </li>
+        <li class="role-item" data-reveal>
+          <span class="logo"><img src="images/logos/verkada.png" alt="Verkada"></span>
+          <div>
+            <div class="role-top"><h3>Computer Vision Engineer <span class="org">Verkada, SF Bay Area</span></h3><span class="when">Feb 2021 – Jul 2023</span></div>
+            <p>On-camera computer vision. Six U.S. patents.</p>
+          </div>
+        </li>
+        <li class="role-item" data-reveal>
+          <span class="logo fill"><img src="images/logos/cmu.png" alt="Carnegie Mellon University"></span>
+          <div>
+            <div class="role-top"><h3>M.S. in Computer Vision <span class="org">Carnegie Mellon University</span></h3><span class="when">2019 – 2020</span></div>
+            <ul class="sub">
+              <li>Reinforcement learning for self-driving with Prof. Jeff Schneider, sponsored by Argo AI.</li>
+              <li><span class="mini"><img src="images/logos/uber.png" alt=""></span>Perception intern at Uber ATG, Summer 2020: adversarial reinforcement learning for motion prediction.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="role-item" data-reveal>
+          <span class="logo fill"><img src="images/logos/xerox.png" alt="Xerox"></span>
+          <div>
+            <div class="role-top"><h3>Research Engineer <span class="org">Xerox Research Centre India</span></h3><span class="when">Jul 2017 – Jul 2019</span></div>
+            <p>Computer vision for transportation, deployed on U.S. highways.</p>
+          </div>
+        </li>
+        <li class="role-item" data-reveal>
+          <span class="logo"><img src="images/logos/iitd.png" alt="IIT Delhi"></span>
+          <div>
+            <div class="role-top"><h3>B.Tech. in Electrical Engineering <span class="org">IIT Delhi</span></h3><span class="when">2013 – 2017</span></div>
+            <ul class="sub">
+              <li><span class="mini"><img src="images/logos/uic.png" alt=""></span>Research intern at the University of Illinois Chicago: applied classic techniques like K-Means and PCA to isolate interesting regions of real MRI scans.</li>
+              <li><span class="mini text ibm">IBM</span>Intern at IBM Labs, Delhi: studied social network graphs.</li>
+            </ul>
+          </div>
+        </li>
+        </ol>
       </div>
     </section>
 
@@ -582,18 +569,6 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
   var header = document.getElementById('header');
   var bar = document.querySelector('.progress');
 
-  /* Split the statement into words */
-  var st = document.getElementById('statement');
-  var words = [];
-  if (st){
-    var accent = {artificial:1, intelligence:1, edge:1};
-    st.innerHTML = st.textContent.trim().split(/\s+/).map(function(w){
-      var key = w.replace(/[^a-z]/gi,'').toLowerCase();
-      return '<span class="w' + (accent[key] ? ' hl' : '') + '">' + w + '</span>';
-    }).join(' ');
-    words = Array.prototype.slice.call(st.querySelectorAll('.w'));
-  }
-
   /* Reveal on scroll */
   var items = document.querySelectorAll('[data-reveal]');
   if (reduce || !('IntersectionObserver' in window)){
@@ -621,13 +596,33 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
     counters.forEach(function(el){ co.observe(el); });
   }
 
+
+  /* Google Scholar stats (data/scholar.json is refreshed daily by a GitHub Action) */
+  fetch('data/scholar.json', {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+    if (!d || !d.citations) return;
+    var box = document.getElementById('scholar-stats');
+    box.innerHTML = '<div><b>' + d.citations + '</b><span>Citations</span></div>' +
+      '<div><b>' + d.h_index + '</b><span>h-index</span></div>' +
+      (d.i10_index != null ? '<div><b>' + d.i10_index + '</b><span>i10-index</span></div>' : '');
+    box.title = 'Google Scholar, updated ' + d.updated;
+    box.hidden = false;
+    var papers = d.papers || {};
+    document.querySelectorAll('.paper h3 a, .feature h3').forEach(function(a){
+      var key = (a.closest('.feature') ? 'gemma 4' : a.textContent).toLowerCase().slice(0, 30);
+      Object.keys(papers).forEach(function(t){
+        if (t.toLowerCase().indexOf(key) === 0 && papers[t] > 0){
+          var v = a.closest('article').querySelector('.venue, .feature .eyebrow');
+          if (v){ var c = document.createElement('span'); c.className = 'cites'; c.textContent = papers[t] + ' citations'; v.after(c); }
+        }
+      });
+    });
+  }).catch(function(){});
+
   /* Active nav link */
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
   var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
 
   /* Scroll-linked effects */
-  var statementSec = document.querySelector('.statement');
-  var stick = document.querySelector('.statement .stick');
   var rail = document.querySelector('.timeline .rail i');
   var timeline = document.getElementById('timeline');
   var px = Array.prototype.slice.call(document.querySelectorAll('.thumb img.px'));
@@ -639,17 +634,9 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
     ticking = false;
     var y = window.scrollY, vh = window.innerHeight, doc = document.documentElement.scrollHeight - vh;
     header.classList.toggle('scrolled', y > 8);
-    if (statementSec){ var sr = statementSec.getBoundingClientRect(); header.classList.toggle('on-dark', sr.top < 60 && sr.bottom > 60); }
     if (reduce) return;
     bar.style.transform = 'scaleX(' + (doc > 0 ? y / doc : 0) + ')';
 
-    if (statementSec && words.length){
-      var r = statementSec.getBoundingClientRect();
-      var p = clamp((-r.top) / (r.height - vh));
-      var lit = p * (words.length + 2);
-      words.forEach(function(w, i){ w.style.setProperty('--a', (0.14 + 0.86 * clamp(lit - i)).toFixed(3)); });
-      stick.style.setProperty('--glow-s', (0.6 + p * 0.7).toFixed(3));
-    }
 
     if (rail && timeline){
       var tr = timeline.getBoundingClientRect();

@@ -6,7 +6,11 @@ req = urllib.request.Request(URL, headers={
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
     "Accept-Language": "en-US,en;q=0.9",
 })
-html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+try:
+    html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+except Exception as e:
+    print(f"Scholar request failed ({e}); keeping previous data.")
+    sys.exit(0)
 cells = re.findall(r'<td class="gsc_rsb_std">(\d+)</td>', html)
 if len(cells) < 4:
     print("Could not parse Scholar stats (blocked or layout changed); keeping previous data.")
