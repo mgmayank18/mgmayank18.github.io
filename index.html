@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mayank Gupta</title>
+<meta name="description" content="Mayank Gupta, software engineer at Google working on on-device LLMs for Pixel. Co-author of the Gemma 4 Technical Report.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --bg:#fbfbfa;
+  --surface:#ffffff;
+  --ink:#16191f;
+  --ink-2:#3d4350;
+  --muted:#6b7280;
+  --line:#e6e7ea;
+  --accent:#0b62a4;
+  --accent-ink:#ffffff;
+  --accent-soft:#e9f2fa;
+
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* Type scale: 1.25 (major third) */
+  --fs-xs:.8rem;
+  --fs-sm:.9rem;
+  --fs-base:1rem;
+  --fs-md:1.25rem;
+  --fs-lg:1.563rem;
+  --fs-xl:clamp(2rem,1.4rem + 2.6vw,2.75rem);
+
+  --space-1:.5rem;
+  --space-2:1rem;
+  --space-3:1.5rem;
+  --space-4:2.5rem;
+  --space-5:4rem;
+
+  --max:72rem;
+  --measure:65ch;
+  --radius:8px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1216; --surface:#161a20; --ink:#e8eaee; --ink-2:#c3c8d1; --muted:#8d95a3; --line:#262c35;
+    --accent:#6cb4ee; --accent-ink:#0b1520; --accent-soft:#132536;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1216; --surface:#161a20; --ink:#e8eaee; --ink-2:#c3c8d1; --muted:#8d95a3; --line:#262c35;
+  --accent:#6cb4ee; --accent-ink:#0b1520; --accent-soft:#132536;
+  color-scheme:dark;
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-base)/1.65 var(--sans);-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px;}
+a:hover{text-decoration-thickness:2px;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+h1,h2,h3{margin:0;text-wrap:balance;}
+p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+
+.container{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:clamp(16px,4vw,32px);}
+.skip{position:absolute;left:-9999px;}
+.skip:focus{left:16px;top:16px;background:var(--surface);padding:8px 12px;z-index:10;}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);min-height:60px;}
+.brand{font:600 var(--fs-base)/1 var(--sans);color:var(--ink);text-decoration:none;letter-spacing:-.01em;white-space:nowrap;}
+.nav{display:flex;gap:clamp(.75rem,2vw,1.75rem);overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav a{font-size:var(--fs-sm);color:var(--ink-2);text-decoration:none;white-space:nowrap;padding-block:6px;}
+.nav a:hover{color:var(--accent);}
+
+/* ---------- Hero ---------- */
+.hero{padding-block:clamp(3rem,8vw,6rem) var(--space-4);}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);align-items:center;}
+.eyebrow{font:500 var(--fs-xs)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.hero h1{font:700 var(--fs-xl)/1.1 var(--serif);letter-spacing:-.02em;margin-top:var(--space-2);}
+.hero .tagline{font-size:var(--fs-md);color:var(--ink-2);margin-top:var(--space-2);max-width:34ch;line-height:1.45;}
+.hero .role{margin-top:var(--space-2);color:var(--muted);font-size:var(--fs-sm);}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:var(--space-3);}
+.btn{display:inline-flex;align-items:center;gap:.4rem;font:500 var(--fs-sm)/1 var(--sans);padding:.7rem 1rem;border-radius:999px;border:1px solid var(--line);color:var(--ink);background:var(--surface);text-decoration:none;transition:border-color .15s,color .15s;}
+.btn:hover{border-color:var(--accent);color:var(--accent);}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
+.btn.primary:hover{color:var(--accent-ink);filter:brightness(1.08);}
+.portrait{width:clamp(160px,28vw,260px);aspect-ratio:1;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font:600 clamp(2.5rem,6vw,4rem)/1 var(--serif);border:1px solid var(--line);overflow:hidden;justify-self:start;}
+.portrait img{width:100%;height:100%;object-fit:cover;}
+
+.now{margin-top:var(--space-4);display:flex;gap:.75rem;align-items:baseline;padding:var(--space-2) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--ink-2);font-size:var(--fs-sm);}
+.now b{font:500 var(--fs-xs)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);flex:none;}
+
+/* ---------- Sections ---------- */
+section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
+.block-head{display:grid;gap:var(--space-1);margin-bottom:var(--space-3);}
+.block-head h2{font:700 var(--fs-lg)/1.2 var(--serif);letter-spacing:-.01em;}
+.block-head p{color:var(--muted);max-width:var(--measure);}
+
+/* Timeline */
+.timeline{display:grid;gap:0;}
+.role-item{display:grid;grid-template-columns:1fr;gap:.25rem;padding-block:var(--space-3);border-top:1px solid var(--line);}
+.role-item:last-child{border-bottom:1px solid var(--line);}
+.when{font:400 var(--fs-xs)/1.5 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;}
+.role-item h3{font:600 var(--fs-base)/1.4 var(--sans);}
+.role-item h3 span{font-weight:400;color:var(--muted);}
+.role-item p{color:var(--ink-2);max-width:var(--measure);margin-top:.25rem;}
+
+/* Feature */
+.feature{display:grid;gap:var(--space-2);padding:clamp(1.25rem,3vw,2rem);border-radius:var(--radius);background:var(--accent-soft);}
+.feature h3{font:700 var(--fs-md)/1.3 var(--serif);}
+.feature p{color:var(--ink-2);max-width:var(--measure);}
+.feature .links{display:flex;flex-wrap:wrap;gap:1rem;font-size:var(--fs-sm);}
+
+/* Lists */
+.list{display:grid;}
+.entry{display:grid;gap:.3rem;padding-block:var(--space-2);border-top:1px solid var(--line);}
+.entry:last-child{border-bottom:1px solid var(--line);}
+.entry h3{font:600 var(--fs-base)/1.45 var(--sans);}
+.entry h3 a{color:var(--ink);text-decoration:none;}
+.entry h3 a:hover{color:var(--accent);text-decoration:underline;}
+.meta{font-size:var(--fs-sm);color:var(--muted);}
+.entry p{color:var(--ink-2);font-size:var(--fs-sm);max-width:var(--measure);}
+.entry .links{display:flex;flex-wrap:wrap;gap:1rem;font-size:var(--fs-sm);}
+.pn{font:400 var(--fs-xs)/1 var(--mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;}
+
+.two-col{display:grid;gap:var(--space-4);}
+
+/* Projects */
+.cards{display:grid;gap:var(--space-2);grid-template-columns:1fr;}
+.card{display:flex;flex-direction:column;gap:.5rem;padding:var(--space-3);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);}
+.card h3{font:600 var(--fs-base)/1.4 var(--sans);}
+.card p{color:var(--ink-2);font-size:var(--fs-sm);flex:1;}
+.card .links{display:flex;flex-wrap:wrap;gap:1rem;font-size:var(--fs-sm);}
+.card{padding:0;overflow:hidden;}
+.card .card-body{display:flex;flex-direction:column;gap:.5rem;padding:var(--space-3);flex:1;}
+.media{display:block;position:relative;aspect-ratio:16/9;max-width:100%;background:var(--accent-soft);border-bottom:1px solid var(--line);overflow:hidden;}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .3s;}
+a.media:hover img{transform:scale(1.03);}
+@media (prefers-reduced-motion: reduce){a.media:hover img{transform:none;}}
+.media .play{position:absolute;inset:auto auto 12px 12px;font:500 var(--fs-xs)/1 var(--sans);background:rgba(0,0,0,.72);color:#fff;padding:6px 10px;border-radius:999px;}
+.media .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font:500 var(--fs-xs)/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;}
+.also{margin-top:var(--space-2);color:var(--muted);font-size:var(--fs-sm);}
+
+/* About */
+.prose{display:grid;gap:var(--space-2);max-width:var(--measure);color:var(--ink-2);}
+.prose h3{font:600 var(--fs-base)/1.4 var(--sans);color:var(--ink);margin-top:var(--space-2);}
+
+/* Footer */
+.site-footer{margin-top:var(--space-5);padding-block:var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);}
+.site-footer .container{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-2);color:var(--muted);font-size:var(--fs-sm);}
+.site-footer ul{display:flex;flex-wrap:wrap;gap:1.25rem;}
+
+/* ---------- Breakpoints ---------- */
+@media (min-width: 720px){
+  .hero-grid{grid-template-columns:1fr auto;}
+  .portrait{justify-self:end;}
+  .role-item{grid-template-columns:11rem 1fr;gap:var(--space-3);}
+  .cards{grid-template-columns:repeat(2,1fr);}
+  .entry-row{display:flex;justify-content:space-between;gap:var(--space-2);align-items:baseline;}
+}
+@media (min-width: 1000px){
+  .two-col{grid-template-columns:1fr 1fr;}
+}
+@media (max-width: 560px){
+  .site-header .container{flex-direction:column;align-items:flex-start;gap:0;padding-block:10px 4px;}
+  .nav{width:100%;}
+  .now{flex-direction:column;gap:.4rem;}
+  .hero-grid{gap:var(--space-3);}
+  .portrait{width:88px;order:-1;font-size:2rem;}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#top">Mayank Gupta</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a href="#patents">Patents</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="container">
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">On-device LLMs · Gemma · Pixel</span>
+          <h1>Mayank Gupta</h1>
+          <p class="tagline">I bring large language models onto the phone in your pocket.</p>
+          <p class="role">Software Engineer at Google, on-device LLMs for Pixel · Co-author, Gemma 4 · Bangalore, India</p>
+          <div class="actions">
+            <a class="btn primary" href="https://drive.google.com/file/d/176tHK2zoqXG47tSVzUmeWVxN7_VbH9HT/view" target="_blank" rel="noopener">Resume</a>
+            <a class="btn" href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+            <a class="btn" href="https://www.linkedin.com/in/mayankguptaiitd/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/mgmayank18" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="mailto:mgmayank18@gmail.com">Email</a>
+          </div>
+        </div>
+        <!-- Replace the initials with <img src="photo.jpg" alt="Mayank Gupta"> -->
+        <div class="portrait" aria-hidden="true">MG</div>
+      </div>
+
+      <p class="now"><b>Now</b><span>Making current and future Gemma models run efficiently on Pixel phones.</span></p>
+    </section>
+
+    <section class="block" id="intro" aria-label="Bio">
+      <div class="prose">
+        <p>I'm a software engineer at Google in Bangalore, where I work on running large language models on Pixel phones. I co-designed the Gemma 4 network for the Pixel SoC and evaluated the Gemma 4 models on-device across a range of datasets, and I'm a co-author of the <a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Gemma 4 Technical Report</a>. Before Google, I spent two and a half years at Verkada in the San Francisco Bay Area building computer vision that runs directly on security cameras, work that led to six U.S. patents. I have an M.S. in Computer Vision from Carnegie Mellon and a B.Tech. in Electrical Engineering from IIT Delhi.</p>
+      </div>
+    </section>
+
+    <section class="block" id="experience">
+      <div class="block-head">
+        <h2>Experience</h2>
+      </div>
+      <ol class="timeline" style="list-style:none;margin:0;padding:0">
+        <li class="role-item">
+          <span class="when">Jul 2023 – Present</span>
+          <div>
+            <h3>Software Engineer <span>· Google, Bangalore</span></h3>
+            <p>On-device LLMs for Pixel. Co-designed the Gemma 4 network for the Pixel SoC and evaluated Gemma 4 models on-device across datasets.</p>
+          </div>
+        </li>
+        <li class="role-item">
+          <span class="when">Feb 2021 – Jul 2023</span>
+          <div>
+            <h3>Computer Vision Engineer <span>· Verkada, San Francisco Bay Area</span></h3>
+            <p>Computer vision that runs on the camera: license plate recognition, people and vehicle analytics, and traffic tracking without cloud processing. Six U.S. patents.</p>
+          </div>
+        </li>
+        <li class="role-item">
+          <span class="when">Summer 2020</span>
+          <div>
+            <h3>Perception Intern <span>· Uber ATG</span></h3>
+            <p>Adversarial reinforcement learning for motion prediction.</p>
+          </div>
+        </li>
+        <li class="role-item">
+          <span class="when">2019 – 2020</span>
+          <div>
+            <h3>M.S. in Computer Vision <span>· Carnegie Mellon University</span></h3>
+            <p>Reinforcement learning for self-driving with Prof. Jeff Schneider, sponsored by Argo AI.</p>
+          </div>
+        </li>
+        <li class="role-item">
+          <span class="when">Jul 2017 – Jul 2019</span>
+          <div>
+            <h3>Research Engineer <span>· Xerox Research Centre India</span></h3>
+            <p>Computer vision for transportation. Vehicle occupancy detection deployed on highways in New York, San Francisco and Los Angeles.</p>
+          </div>
+        </li>
+        <li class="role-item">
+          <span class="when">2013 – 2017</span>
+          <div>
+            <h3>B.Tech. in Electrical Engineering <span>· IIT Delhi</span></h3>
+            <p>Founded IIT Delhi OnAir, the institute's broadcasting studio.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="block" id="research">
+      <div class="block-head">
+        <h2>Research</h2>
+        <p>Full list on <a href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      </div>
+
+      <article class="feature">
+        <span class="eyebrow">Latest · 2026</span>
+        <h3>Gemma 4 Technical Report</h3>
+        <p>Gemma Team, Google DeepMind. Co-author. I co-designed the network for the Pixel SoC and evaluated the models on-device across a range of datasets.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">arXiv:2607.02770</a></div>
+      </article>
+
+      <ul class="list" style="margin-top:var(--space-3)">
+        <li class="entry">
+          <div class="entry-row">
+            <h3><a href="https://drive.google.com/file/d/1q3InVLZd7AGVZpR3TxFSBxSnRKxxcBJE/view" target="_blank" rel="noopener">Zero Shot License Plate Re-Identification</a></h3>
+            <span class="pn">WACV 2019</span>
+          </div>
+          <span class="meta">M. Gupta, A. Kumar, S. Madhvanath</span>
+          <p>Matches plates against a text database with 99.6% accuracy using a multimodal triplet loss.</p>
+          <div class="links">
+            <a href="https://drive.google.com/file/d/1q3InVLZd7AGVZpR3TxFSBxSnRKxxcBJE/view" target="_blank" rel="noopener">Paper</a>
+            <a href="https://drive.google.com/file/d/1dJApxdHqtEGU-Yo73-0sjIMgJ0q1qnpp/view" target="_blank" rel="noopener">Slides</a>
+            <a href="https://docs.google.com/presentation/d/1huspgvOibwHtI0V1V72rL3DYz7whdlMHIFP9qJwO0Yw/edit" target="_blank" rel="noopener">Poster</a>
+            <a href="https://insights.conduent.com/conduent/improving-machine-learning-to-read-license-plates-for-increased-toll-enforcement" target="_blank" rel="noopener">Article</a>
+          </div>
+        </li>
+        <li class="entry">
+          <div class="entry-row">
+            <h3><a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/5005" target="_blank" rel="noopener">VPDS: An AI-Based Automated Vehicle Occupancy and Violation Detection System</a></h3>
+            <span class="pn">IAAI 2019</span>
+          </div>
+          <span class="meta">A. Kumar, M. Gupta, et al.</span>
+          <p>HOV-lane passenger counting deployed on highways in New York, San Francisco and Los Angeles.</p>
+          <div class="links">
+            <a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/5005" target="_blank" rel="noopener">Paper</a>
+            <a href="https://drive.google.com/file/d/1xbS6jsLQytbI8rqmTvAxknNRNmPDdW8I/view" target="_blank" rel="noopener">Slides</a>
+            <a href="https://insights.conduent.com/conduent-blog/using-ai-based-automated-vehicle-occupancy-detection-has-many-advantages" target="_blank" rel="noopener">Article</a>
+          </div>
+        </li>
+        <li class="entry">
+          <div class="entry-row">
+            <h3><a href="https://arxiv.org/abs/1809.08488" target="_blank" rel="noopener">Parametric Synthesis of Text on Stylized Backgrounds using ProGANs</a></h3>
+            <span class="pn">arXiv 2018</span>
+          </div>
+          <p>Synthetic plates fooled an industrial OCR system 89% of the time, against 92% for real plates.</p>
+          <div class="links">
+            <a href="https://arxiv.org/abs/1809.08488" target="_blank" rel="noopener">Paper</a>
+            <a href="https://www.youtube.com/watch?v=cwbkhtCsKnY" target="_blank" rel="noopener">Video</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block" id="patents">
+      <div class="block-head">
+        <h2>Patents</h2>
+        <p>On-camera computer vision, granted to Verkada. <a href="https://patents.google.com/?inventor=Mayank+Gupta&amp;assignee=Verkada" target="_blank" rel="noopener">View on Google Patents</a>.</p>
+      </div>
+      <ul class="list">
+        <li class="entry"><div class="entry-row"><h3>Automatic multi-plate recognition</h3><span class="pn">US 11,978,267 · 2024</span></div></li>
+        <li class="entry"><div class="entry-row"><h3>Automatic license plate recognition with motion detection</h3><span class="pn">US 11,948,373 · 2024</span></div></li>
+        <li class="entry"><div class="entry-row"><h3>Traffic pattern tracking with hyperzooms</h3><span class="pn">US 11,900,688 · 2024</span></div></li>
+        <li class="entry"><div class="entry-row"><h3>Hyperzoom attribute analytics on the edge</h3><span class="pn">US 11,734,343 · 2023 &nbsp;·&nbsp; US 12,056,183 · 2024</span></div></li>
+        <li class="entry"><div class="entry-row"><h3>People and vehicle analytics on the edge</h3><span class="pn">US 12,205,380 · 2025</span></div></li>
+      </ul>
+    </section>
+
+    <section class="block" id="projects">
+      <div class="block-head">
+        <h2>Projects</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <a class="media" href="https://www.youtube.com/watch?v=NPzpLOPuHIg" target="_blank" rel="noopener" aria-label="Watch the self-driving RL agent demo">
+            <img src="https://img.youtube.com/vi/NPzpLOPuHIg/hqdefault.jpg" alt="Simulator frame from the self-driving RL agent demo" loading="lazy">
+            <span class="play">▶ Watch demo</span>
+          </a>
+          <div class="card-body">
+            <span class="eyebrow">CMU · Argo AI · 2020</span>
+            <h3>Reinforcement learning for self-driving cars</h3>
+            <p>End-to-end RL agent that maps camera images and waypoints to speed and steering, beating prior benchmarks on no-crash scenarios.</p>
+            <div class="links">
+              <a href="https://mscvprojects.ri.cmu.edu/2020teamd/" target="_blank" rel="noopener">Project site</a>
+              <a href="https://www.slideshare.net/mgmayank18/mscv-capstone-spring-2020-presentation-rl-for-ad" target="_blank" rel="noopener">Slides</a>
+              <a href="https://www.youtube.com/watch?v=20YfxLH_APE" target="_blank" rel="noopener">Talk</a>
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="media">
+            <!-- Replace this placeholder with your point cloud image, e.g. <img src="orbslam-pointcloud.jpg" alt="Dense point cloud reconstructed with ORB-SLAM2"> -->
+            <span class="ph">Point cloud image</span>
+          </div>
+          <div class="card-body">
+            <span class="eyebrow">CMU</span>
+            <h3>Dense reconstruction with ORB-SLAM2</h3>
+            <p>Unprojects RGB-D frames along the ORB-SLAM2 camera trajectory and fuses them into a dense, memory-efficient point cloud.</p>
+            <div class="links">
+              <a href="https://1drv.ms/p/s!AhCJOrZSZzSBwSHpPmUsrOGRdq4x?e=mvt1Lz" target="_blank" rel="noopener">Slides</a>
+              <a href="https://github.com/mgmayank18/ORB_SLAM2" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="also">Also: online low-shot learning for face classification (<a href="https://drive.google.com/file/d/1Iyj2HESSgUKCGCOr37cK6skadIoyVo35/view" target="_blank" rel="noopener">slides</a>, <a href="https://github.com/mgmayank18/scalable-face-classification" target="_blank" rel="noopener">code</a>).</p>
+    </section>
+
+    <section class="block" id="about">
+      <div class="block-head">
+        <h2>About</h2>
+      </div>
+      <div class="prose">
+        <p>I've spent almost a decade making machine learning work under real-world constraints. That started with computer vision on highway and security cameras, and today it means large language models on phones.</p>
+        <p>I studied electrical engineering at IIT Delhi, then joined Xerox Research Centre India to build computer vision for transportation, including license plate re-identification and HOV-lane occupancy detection that ran on U.S. highways. I went on to an M.S. in Computer Vision at Carnegie Mellon, researching reinforcement learning for self-driving with Prof. Jeff Schneider and interning with Uber ATG's perception team.</p>
+        <p>At Verkada I built computer vision that runs directly on the camera, from license plate recognition to people and vehicle analytics. Since 2023 I've been at Google in Bangalore working on LLMs for Pixel, including co-designing Gemma 4 for the Pixel SoC and evaluating it on-device.</p>
+        <h3>Beyond work</h3>
+        <p>At IIT Delhi I founded IIT Delhi OnAir, the institute's official broadcasting studio. Getting it approved and funded took two years, and I served as its first station manager, leading a team of 11.</p>
+        <!-- Optional: add a line about interests outside work here. -->
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Mayank Gupta · mgmayank18@gmail.com</span>
+    <ul>
+      <li><a href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Scholar</a></li>
+      <li><a href="https://www.linkedin.com/in/mayankguptaiitd/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/mgmayank18" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
