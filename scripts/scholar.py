@@ -1,20 +1,11 @@
 """Refresh data/scholar.json with citation stats.
 
-Tries Mayank's Google Scholar profile first. Scholar often blocks GitHub's
-servers, so it falls back to Semantic Scholar's public API for the papers
-listed on the site.
+Reads Mayank's Google Scholar profile. Scholar often blocks GitHub's servers;
+on those days the previous data is kept and the page shows nothing new.
 """
-import datetime, json, re, sys, time, urllib.parse, urllib.request
+import datetime, json, re, sys, urllib.request
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-PAPERS = [
-    ("Gemma 4 Technical Report", "arXiv:2607.02770"),
-    ("Zero Shot License Plate Re-Identification", None),
-    ("VPDS: An AI-Based Automated Vehicle Occupancy and Violation Detection System", None),
-    ("Parametric Synthesis of Text on Stylized Backgrounds using ProGANs", "arXiv:1809.08488"),
-]
-
-
 def get(url, headers=None):
     req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
     return urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
@@ -35,32 +26,8 @@ def from_google_scholar():
             "i10_index": int(cells[4]) if len(cells) > 4 else None, "papers": papers}
 
 
-def from_semantic_scholar():
-    base = "https://api.semanticscholar.org/graph/v1/paper/"
-    papers = {}
-    for title, pid in PAPERS:
-        for attempt in range(3):
-            try:
-                if pid:
-                    d = json.loads(get(base + pid + "?fields=title,citationCount"))
-                else:
-                    q = urllib.parse.quote(title)
-                    d = json.loads(get(base + "search/match?query=" + q + "&fields=title,citationCount"))["data"][0]
-                papers[title] = d.get("citationCount") or 0
-                break
-            except Exception as e:
-                print(f"  {title}: {e}")
-                time.sleep(5 * (attempt + 1))
-        time.sleep(1.5)
-    if not papers:
-        raise RuntimeError("no papers resolved")
-    counts = sorted(papers.values(), reverse=True)
-    h = sum(1 for i, c in enumerate(counts, 1) if c >= i)
-    return {"source": "Semantic Scholar", "citations": sum(counts), "h_index": h, "i10_index": None, "papers": papers}
-
-
 out = None
-for fn in (from_google_scholar, from_semantic_scholar):
+for fn in (from_google_scholar,):
     try:
         out = fn()
         break
