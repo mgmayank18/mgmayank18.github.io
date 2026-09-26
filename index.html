@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mayank Gupta</title>
-<meta name="description" content="Mayank Gupta, software engineer at Google working on on-device LLMs for Pixel. Co-author of the Gemma 4 Technical Report.">
+<meta name="description" content="Mayank Gupta builds artificial intelligence systems that live entirely on the edge. Engineer at Google India working on on-device AI for Pixel.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -85,10 +85,11 @@ ul{margin:0;padding:0;list-style:none;}
 
 /* ---------- Hero ---------- */
 .hero{padding-block:clamp(3rem,8vw,6rem) var(--space-4);}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);align-items:center;}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);align-items:start;}
 .eyebrow{font:500 var(--fs-xs)/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
-.hero h1{font:700 var(--fs-xl)/1.1 var(--serif);letter-spacing:-.02em;margin-top:var(--space-2);}
-.hero .tagline{font-size:var(--fs-md);color:var(--ink-2);margin-top:var(--space-2);max-width:34ch;line-height:1.45;}
+.hero h1{font:700 var(--fs-xl)/1.1 var(--serif);letter-spacing:-.02em;}
+.hero-prose{display:grid;gap:var(--space-2);margin-top:var(--space-3);color:var(--ink-2);max-width:var(--measure);}
+.hero .tagline{font-size:var(--fs-md);color:var(--ink);margin-top:var(--space-2);max-width:40ch;line-height:1.45;font-weight:500;}
 .hero .role{margin-top:var(--space-2);color:var(--muted);font-size:var(--fs-sm);}
 .actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:var(--space-3);}
 .btn{display:inline-flex;align-items:center;gap:.4rem;font:500 var(--fs-sm)/1 var(--sans);padding:.7rem 1rem;border-radius:999px;border:1px solid var(--line);color:var(--ink);background:var(--surface);text-decoration:none;transition:border-color .15s,color .15s;}
@@ -163,8 +164,8 @@ a.media:hover img{transform:scale(1.03);}
 
 /* ---------- Breakpoints ---------- */
 @media (min-width: 720px){
-  .hero-grid{grid-template-columns:1fr auto;}
-  .portrait{justify-self:end;}
+  .hero-grid{grid-template-columns:auto 1fr;gap:clamp(2rem,5vw,4rem);}
+  .portrait{order:-1;justify-self:start;}
   .role-item{grid-template-columns:11rem 1fr;gap:var(--space-3);}
   .cards{grid-template-columns:repeat(2,1fr);}
   .entry-row{display:flex;justify-content:space-between;gap:var(--space-2);align-items:baseline;}
@@ -177,7 +178,7 @@ a.media:hover img{transform:scale(1.03);}
   .nav{width:100%;}
   .now{flex-direction:column;gap:.4rem;}
   .hero-grid{gap:var(--space-3);}
-  .portrait{width:88px;order:-1;font-size:2rem;}
+  .portrait{width:120px;order:-1;}
 }
 </style>
 </head>
@@ -188,11 +189,12 @@ a.media:hover img{transform:scale(1.03);}
   <div class="container">
     <a class="brand" href="#top">Mayank Gupta</a>
     <nav class="nav" aria-label="Sections">
+      <a href="#top">About</a>
       <a href="#experience">Experience</a>
       <a href="#research">Research</a>
       <a href="#patents">Patents</a>
       <a href="#projects">Projects</a>
-      <a href="#about">About</a>
+      <a href="#beyond">Beyond work</a>
     </nav>
   </div>
 </header>
@@ -202,11 +204,14 @@ a.media:hover img{transform:scale(1.03);}
   <div class="container">
     <section class="hero" id="top">
       <div class="hero-grid">
-        <div>
-          <span class="eyebrow">On-device LLMs · Gemma · Pixel</span>
-          <h1>Mayank Gupta</h1>
-          <p class="tagline">I bring large language models onto the phone in your pocket.</p>
-          <p class="role">Software Engineer at Google, on-device LLMs for Pixel · Co-author, Gemma 4 · Bangalore, India</p>
+        <div class="hero-text">
+          <h1>Hi, I'm Mayank.</h1>
+          <p class="tagline">I build artificial intelligence systems that live entirely on the edge.</p>
+          <div class="hero-prose">
+            <p>Currently, I'm an engineer at Google India, developing on-device AI for Pixel smartphones. My recent work includes co-designing and optimizing <a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Gemma 4</a>, and future iterations, to run efficiently within the strict hardware constraints of the Google Tensor SoC. Before joining Google, I was in the SF Bay Area building patented, cutting-edge computer vision pipelines for Verkada.</p>
+            <p>My journey into ML started at IIT Delhi and led me to Xerox Research Center India, where I spent two years developing computer vision solutions for transportation. To deepen my expertise, I earned an MS in Computer Vision from Carnegie Mellon University, researching under Prof. Jeff Schneider and building with the perception team at Uber ATG.</p>
+            <p>Feel free to check out my publications and patents on <a href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>, or explore some of my favorite projects below.</p>
+          </div>
           <div class="actions">
             <a class="btn primary" href="https://drive.google.com/file/d/176tHK2zoqXG47tSVzUmeWVxN7_VbH9HT/view" target="_blank" rel="noopener">Resume</a>
             <a class="btn" href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
@@ -215,18 +220,11 @@ a.media:hover img{transform:scale(1.03);}
             <a class="btn" href="mailto:mgmayank18@gmail.com">Email</a>
           </div>
         </div>
-        <!-- Loads images/profile.jpg from this repo; falls back to the copy on the old Google Site. -->
-        <div class="portrait"><img src="images/profile.jpg" alt="Mayank Gupta" width="520" height="520" onerror="this.onerror=null;this.src='https://sites.google.com/sitesv-images-rt/AMxu72srSNlY7RhznmDGNrLqohmWk3Mu_91oLIi2T7k_WRAtlj_d8KaV5T8HtSltFgwR6EVK7y8jfu3ftvfeu-4SN0uo9bNhlFNT-oJ7xe18Cz26tb8dh2uS-LreTwpQ4o2FCUKjncy2jFpU5jdurK8T9rIDxqt2_Sw8w-lmnB9cwogiXocBbeg7-vsXoR8ZTn75J3jrhkIvMhmEAEbn9A3jULzpVEv-aRsQclpALG6Zlxs=w1280'"></div>
+        <div class="portrait"><img src="images/profile.jpg" alt="Mayank Gupta" width="640" height="640"></div>
       </div>
 
-      <p class="now"><b>Now</b><span>Making current and future Gemma models run efficiently on Pixel phones.</span></p>
     </section>
 
-    <section class="block" id="intro" aria-label="Bio">
-      <div class="prose">
-        <p>I'm a software engineer at Google in Bangalore, where I work on running large language models on Pixel phones. I co-designed the Gemma 4 network for the Pixel SoC and evaluated the Gemma 4 models on-device across a range of datasets, and I'm a co-author of the <a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Gemma 4 Technical Report</a>. Before Google, I spent two and a half years at Verkada in the San Francisco Bay Area building computer vision that runs directly on security cameras, work that led to six U.S. patents. I have an M.S. in Computer Vision from Carnegie Mellon and a B.Tech. in Electrical Engineering from IIT Delhi.</p>
-      </div>
-    </section>
 
     <section class="block" id="experience">
       <div class="block-head">
@@ -370,8 +368,7 @@ a.media:hover img{transform:scale(1.03);}
         </article>
         <article class="card">
           <a class="media" href="https://1drv.ms/p/s!AhCJOrZSZzSBwSHpPmUsrOGRdq4x?e=mvt1Lz" target="_blank" rel="noopener" aria-label="View the ORB-SLAM2 reconstruction slides">
-            <!-- Loads images/pointcloud.jpg from this repo; falls back to the copy on the old Google Site. -->
-            <img src="images/pointcloud.jpg" alt="Dense point cloud reconstructed from RGB-D frames with ORB-SLAM2" loading="lazy" onerror="this.onerror=null;this.src='https://sites.google.com/sitesv-images-rt/AMxu72tyghnPFi19v3J1zv3KOs787uVSTTUm24BMtvASMxrpurExZdKwkSu5t5VH9MSNLYqT6j6Am2Z1ioP3wqVbD-6A9xbrWOJOjItBk5VRQPnhrW3dPmzfZFDT0QAHs0fUFWTj68sC1ZxsZ9LBZHYQUKC_yJexM6EWKPY2JaOk31ratL_4V6tYJ7sex6etdhRUdb5z9ZwSsEVpgIqr=w1280'">
+            <img src="images/pointcloud.jpg" alt="Dense point cloud reconstructed from RGB-D frames with ORB-SLAM2" loading="lazy">
           </a>
           <div class="card-body">
             <span class="eyebrow">CMU</span>
@@ -387,17 +384,12 @@ a.media:hover img{transform:scale(1.03);}
       <p class="also">Also: online low-shot learning for face classification (<a href="https://drive.google.com/file/d/1Iyj2HESSgUKCGCOr37cK6skadIoyVo35/view" target="_blank" rel="noopener">slides</a>, <a href="https://github.com/mgmayank18/scalable-face-classification" target="_blank" rel="noopener">code</a>).</p>
     </section>
 
-    <section class="block" id="about">
+    <section class="block" id="beyond">
       <div class="block-head">
-        <h2>About</h2>
+        <h2>Beyond work</h2>
       </div>
       <div class="prose">
-        <p>I've spent almost a decade making machine learning work under real-world constraints. That started with computer vision on highway and security cameras, and today it means large language models on phones.</p>
-        <p>I studied electrical engineering at IIT Delhi, then joined Xerox Research Centre India to build computer vision for transportation, including license plate re-identification and HOV-lane occupancy detection that ran on U.S. highways. I went on to an M.S. in Computer Vision at Carnegie Mellon, researching reinforcement learning for self-driving with Prof. Jeff Schneider and interning with Uber ATG's perception team.</p>
-        <p>At Verkada I built computer vision that runs directly on the camera, from license plate recognition to people and vehicle analytics. Since 2023 I've been at Google in Bangalore working on LLMs for Pixel, including co-designing Gemma 4 for the Pixel SoC and evaluating it on-device.</p>
-        <h3>Beyond work</h3>
         <p>At IIT Delhi I founded IIT Delhi OnAir, the institute's official broadcasting studio. Getting it approved and funded took two years, and I served as its first station manager, leading a team of 11.</p>
-        <!-- Optional: add a line about interests outside work here. -->
       </div>
     </section>
 
