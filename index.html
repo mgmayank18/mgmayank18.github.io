@@ -153,10 +153,13 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 
 /* Timeline */
 .timeline{position:relative;padding-left:0;}
-.timeline .rail{position:absolute;left:23px;top:8px;bottom:8px;width:2px;background:var(--line);border-radius:2px;}
+.timeline .rail{position:absolute;left:23px;top:var(--rail-top,40px);height:var(--rail-h,calc(100% - 80px));width:2px;background:var(--line);border-radius:2px;}
 .timeline .rail i{position:absolute;inset:0;background:linear-gradient(var(--accent),var(--glow));transform-origin:top;transform:scaleY(var(--fill,0));border-radius:2px;}
 .role-item{position:relative;display:grid;grid-template-columns:48px 1fr;gap:1.1rem;align-items:center;padding-block:.9rem;}
 .role-item .logo{position:relative;z-index:1;box-shadow:0 0 0 6px var(--bg);}
+/* Ferris-wheel rise: scroll-scrubbed, --q goes 1 (below) to 0 (settled) */
+.js .role-item{--q:0;transform-origin:-45% 50%;transform:rotate(calc(var(--q) * 16deg));opacity:calc(1 - var(--q) * .9);will-change:transform;}
+.js .role-item .logo{transform:rotate(calc(var(--q) * -16deg)) scale(calc(1 - var(--q) * .25));}
 .role-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline;}
 .role-item h3{font:600 var(--fs-base)/1.4 var(--sans);}
 .role-item h3 .org{font-weight:400;}
@@ -185,6 +188,7 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .thumb img{position:absolute;left:0;top:0;width:100%;height:115%;object-fit:cover;transform:translateY(var(--py,0));will-change:transform;}
 .thumb.contain{background:#f4f4f2;}
 .thumb.contain.dark{background:#232323;}
+.thumb.contain.white{background:#fff;}
 .thumb.contain img{object-fit:contain;height:100%;transform:none;padding:4%;}
 .paper h3{font:600 var(--fs-md)/1.35 var(--sans);letter-spacing:-.01em;}
 .paper h3 a{color:var(--ink);text-decoration:none;}
@@ -203,14 +207,15 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 /* Patents */
 .patents{display:grid;gap:var(--space-4);}
 .big-count{display:flex;align-items:flex-end;gap:1.1rem;}
-.big-count .n{font:700 clamp(5rem,3rem + 10vw,10rem)/.8 var(--serif);letter-spacing:-.05em;background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 35%,transparent));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;}
+.big-count .n{display:inline-block;padding:0 .12em .06em 0;margin-right:-.12em;font:700 clamp(5rem,3rem + 10vw,10rem)/.8 var(--serif);letter-spacing:-.05em;background:linear-gradient(180deg,var(--ink),color-mix(in srgb,var(--ink) 35%,transparent));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;}
 .big-count .lbl{display:grid;gap:.5rem;padding-bottom:.5rem;color:var(--muted);font-size:var(--fs-sm);}
 .big-count .lbl b{color:var(--ink);font-size:var(--fs-md);font-weight:600;}
 .patent-list{display:grid;}
 .patent-list li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding-block:1.1rem;border-top:1px solid var(--line);}
 .patent-list li:last-child{border-bottom:1px solid var(--line);}
-.patent-list h3{font:500 var(--fs-base)/1.45 var(--sans);}
-.pn{font:400 var(--fs-xs)/1.6 var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;}
+.patent-list h3{font:600 var(--fs-base)/1.45 var(--sans);}
+.patent-list p{color:var(--ink-2);font-size:var(--fs-sm);margin-top:.3rem;max-width:60ch;}
+.pn{flex:none;white-space:nowrap;font:400 var(--fs-xs)/1.6 var(--mono);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;}
 
 /* Projects */
 .cards{display:grid;gap:var(--space-3);grid-template-columns:1fr;}
@@ -277,6 +282,7 @@ section.block.beyond{padding-top:var(--space-4);}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   .js [data-reveal]{opacity:1;transform:none;transition:none;}
+  .js .role-item,.js .role-item .logo{transform:none;opacity:1;}
   .feature::before{animation:none;}
   .thumb img{transform:none;height:100%;}
   .progress{display:none;}
@@ -347,35 +353,35 @@ section.block.beyond{padding-top:var(--space-4);}
       <div class="timeline" id="timeline">
         <span class="rail" aria-hidden="true"><i></i></span>
         <ol>
-        <li class="role-item" data-reveal>
+        <li class="role-item">
           <span class="logo"><img src="images/logos/google.png" alt="Google"></span>
           <div>
             <div class="role-top"><h3>Software Engineer <span class="org">Google</span></h3><span class="when">2023 – Present</span></div>
             <p>On-device AI for Pixel, including the Gemma family of models.</p>
           </div>
         </li>
-        <li class="role-item" data-reveal>
+        <li class="role-item">
           <span class="logo"><img src="images/logos/verkada.png" alt="Verkada"></span>
           <div>
             <div class="role-top"><h3>Computer Vision Engineer <span class="org">Verkada</span></h3><span class="when">2021 – 2023</span></div>
             <p>Computer vision on the edge for security cameras.</p>
           </div>
         </li>
-        <li class="role-item" data-reveal>
+        <li class="role-item">
           <span class="logo fill"><img src="images/logos/cmu.png" alt="Carnegie Mellon University"></span>
           <div>
             <div class="role-top"><h3>M.S. in Computer Vision <span class="org">Carnegie Mellon University</span></h3><span class="when">2019 – 2020</span></div>
             <p>Reinforcement learning for self-driving cars.</p>
           </div>
         </li>
-        <li class="role-item" data-reveal>
+        <li class="role-item">
           <span class="logo fill"><img src="images/logos/xerox.png" alt="Xerox"></span>
           <div>
             <div class="role-top"><h3>Research Engineer <span class="org">Xerox Research Centre India</span></h3><span class="when">2017 – 2019</span></div>
             <p>Computer vision for transportation.</p>
           </div>
         </li>
-        <li class="role-item" data-reveal>
+        <li class="role-item">
           <span class="logo"><img src="images/logos/iitd.png" alt="IIT Delhi"></span>
           <div>
             <div class="role-top"><h3>B.Tech. in Electrical Engineering <span class="org">IIT Delhi</span></h3><span class="when">2013 – 2017</span></div>
@@ -399,8 +405,9 @@ section.block.beyond{padding-top:var(--space-4);}
           <span class="eyebrow">Latest · 2026 · Google DeepMind</span>
         </div>
         <h3>Gemma 4</h3>
-        <p>Gemma 4 Technical Report. Co-author. I co-designed the network for the Pixel SoC and evaluated the models on-device across a range of datasets.</p>
-        <div class="links"><a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Read on arXiv →</a></div>
+        <p>Co-author of the Gemma 4 Technical Report. I co-designed the network for the Pixel Tensor SoC and evaluated the models on-device across a range of datasets, and I'm now working on the next generation of Gemma models.</p>
+        <p>My day to day sits where models meet silicon: cutting-edge transformer implementations and KV cache reduction on one side, and compilers, performance tooling, simulators and the chip's hardware layout on the other. My work on evaluating Gemini models on edge devices is described in a Google defensive publication.</p>
+        <div class="links"><a href="https://arxiv.org/abs/2607.02770" target="_blank" rel="noopener">Gemma 4 report on arXiv →</a><a href="https://www.tdcommons.org/dpubs_series/10854/" target="_blank" rel="noopener">On-device evaluation framework →</a></div>
       </article>
 
       <div class="papers">
@@ -420,7 +427,7 @@ section.block.beyond{padding-top:var(--space-4);}
           </div>
         </article>
         <article class="paper">
-          <a class="thumb" href="https://www.aaai.org/ojs/index.php/AAAI/article/view/5005" target="_blank" rel="noopener" data-reveal="zoom"><img class="px" src="images/work/vpds.jpg" alt="Night-time highway camera frame with the windshield region detected" loading="lazy"></a>
+          <a class="thumb contain white" href="https://www.aaai.org/ojs/index.php/AAAI/article/view/5005" target="_blank" rel="noopener" data-reveal="zoom"><img src="images/work/vpds.jpg" alt="VPDS system diagram: front, side and license plate cameras feed AI processing for toll and fine collection" loading="lazy"></a>
           <div data-reveal style="--d:1">
             <span class="venue">IAAI 2019</span>
             <h3><a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/5005" target="_blank" rel="noopener">VPDS: An AI-Based Automated Vehicle Occupancy and Violation Detection System</a></h3>
@@ -438,7 +445,7 @@ section.block.beyond{padding-top:var(--space-4);}
           <div data-reveal style="--d:1">
             <span class="venue">arXiv 2018</span>
             <h3><a href="https://arxiv.org/abs/1809.08488" target="_blank" rel="noopener">Parametric Synthesis of Text on Stylized Backgrounds using ProGANs</a></h3>
-            <p>Synthetic plates fooled an industrial OCR system 89% of the time, against 92% for real plates.</p>
+            <p>An early attempt at text-to-image synthesis, done in a parametric way.</p>
             <div class="links">
               <a href="https://arxiv.org/abs/1809.08488" target="_blank" rel="noopener">Paper</a>
               <a href="https://www.youtube.com/watch?v=cwbkhtCsKnY" target="_blank" rel="noopener">Video</a>
@@ -460,11 +467,10 @@ section.block.beyond{padding-top:var(--space-4);}
           </div>
         </div>
         <ul class="patent-list">
-          <li data-reveal><h3>Automatic multi-plate recognition</h3><span class="pn">US 11,978,267<br>2024</span></li>
-          <li data-reveal><h3>Automatic license plate recognition with motion detection</h3><span class="pn">US 11,948,373<br>2024</span></li>
-          <li data-reveal><h3>Traffic pattern tracking with hyperzooms</h3><span class="pn">US 11,900,688<br>2024</span></li>
-          <li data-reveal><h3>Hyperzoom attribute analytics on the edge</h3><span class="pn">US 11,734,343 · 2023<br>US 12,056,183 · 2024</span></li>
-          <li data-reveal><h3>People and vehicle analytics on the edge</h3><span class="pn">US 12,205,380<br>2025</span></li>
+          <li data-reveal><div><h3>Automatic multi-plate recognition</h3><p>Reads every license plate in view on the camera itself, tracking each plate across frames and combining the reads, including stacked and multi-line plates. I owned the license plate stack and built all of it from the ground up.</p></div><span class="pn">US 11,978,267<br>2024</span></li>
+          <li data-reveal><div><h3>Automatic license plate recognition</h3><p>Gate cameras start reading plates the moment they detect motion, and aggregate several frames into one confident read. Part of the same license plate stack.</p></div><span class="pn">US 11,948,373<br>2024</span></li>
+          <li data-reveal><div><h3>People and vehicle analytics on the edge</h3><p>Tracks people and vehicles on the camera and stores their tracks on the device, ready to search. I wrote the object tracker, first for license plates; it went on to track faces, people and vehicles across the product.</p></div><span class="pn">US 11,900,688 · 2024<br>US 12,205,380 · 2025</span></li>
+          <li data-reveal><div><h3>Hyperzoom attribute analytics on the edge</h3><p>Analyzes zoomed-in crops of people and vehicles (hyperzooms) on the camera for attributes like clothing and vehicle color. I built the capture of raw images straight from the sensor that gives hyperzooms their quality.</p></div><span class="pn">US 11,734,343 · 2023<br>US 12,056,183 · 2024</span></li>
         </ul>
       </div>
     </section>
@@ -611,6 +617,16 @@ section.block.beyond{padding-top:var(--space-4);}
   var rail = document.querySelector('.timeline .rail i');
   var timeline = document.getElementById('timeline');
   var px = Array.prototype.slice.call(document.querySelectorAll('.thumb img.px'));
+  var roles = Array.prototype.slice.call(document.querySelectorAll('.role-item'));
+
+  /* Rail runs exactly from the first logo's centre to the last one's (layout offsets ignore transforms) */
+  function layoutRail(){
+    if (!timeline || !roles.length) return;
+    function mid(li){ var l = li.querySelector('.logo'); return li.offsetTop + l.offsetTop + l.offsetHeight / 2; }
+    var a = mid(roles[0]), b = mid(roles[roles.length - 1]);
+    timeline.style.setProperty('--rail-top', a + 'px');
+    timeline.style.setProperty('--rail-h', (b - a) + 'px');
+  }
   var ticking = false;
 
   function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -628,6 +644,11 @@ section.block.beyond{padding-top:var(--space-4);}
       rail.style.setProperty('--fill', clamp((vh * 0.6 - tr.top) / tr.height).toFixed(3));
     }
 
+    roles.forEach(function(li){
+      var top = timeline.getBoundingClientRect().top + li.offsetTop;
+      li.style.setProperty('--q', (1 - clamp((vh * 0.98 - top) / (vh * 0.28))).toFixed(3));
+    });
+
     px.forEach(function(img){
       var b = img.parentNode.getBoundingClientRect();
       if (b.bottom < 0 || b.top > vh) return;
@@ -641,7 +662,9 @@ section.block.beyond{padding-top:var(--space-4);}
   }
 
   window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
-  window.addEventListener('resize', update);
+  window.addEventListener('resize', function(){ layoutRail(); update(); });
+  window.addEventListener('load', layoutRail);
+  layoutRail();
   update();
 })();
 </script>
