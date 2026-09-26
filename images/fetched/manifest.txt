@@ -1,0 +1,11 @@
+wp-IIT_Delhi-originalimage.org&utm_campaign=api&utm_content=thumbnail 200 52342 https://thumb.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/330px-Indian_Institute_of_Technology_Delhi_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail
+wp-IIT_Delhi-thumbnail.org&utm_campaign=api&utm_content=thumbnail 200 52342 https://thumb.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/330px-Indian_Institute_of_Technology_Delhi_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail
+wp-IBM-originalimage.org&utm_campaign=api&utm_content=thumbnail_unscaled 200 3706025 https://upload.wikimedia.org/wikipedia/commons/b/b5/IBM_CHQ_-_Oct_2014.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled
+wp-IBM-thumbnail.org&utm_campaign=api&utm_content=thumbnail 200 34960 https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/IBM_CHQ_-_Oct_2014.jpg/330px-IBM_CHQ_-_Oct_2014.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail
+wp-IBM_Research-originalimage.org&utm_campaign=api&utm_content=thumbnail 200 807945 https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/IBM_Yorktown_Heights.jpg/3840px-IBM_Yorktown_Heights.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail
+wp-IBM_Research-thumbnail.org&utm_campaign=api&utm_content=thumbnail 200 10321 https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/IBM_Yorktown_Heights.jpg/330px-IBM_Yorktown_Heights.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail
+s2-iitd_ac_in.png 404 726
+s2-home_iitd_ac_in.png 404 726
+s2-uic_edu.png 200 15690
+s2-ibm_com.png 200 2379
+s2-research_ibm_com.png 200 626
