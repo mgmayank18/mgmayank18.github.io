@@ -1,0 +1,36 @@
+name: Fetch logos
+on:
+  push:
+    paths: [".github/workflows/fetch-logos.yml"]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        run: |
+          set +e
+          mkdir -p images/fetched
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          M=images/fetched/manifest.txt; : > $M
+          for p in IIT_Delhi University_of_Illinois_Chicago IBM IBM_Research; do
+            curl -sSL -A "$UA" "https://en.wikipedia.org/api/rest_v1/page/summary/$p" -o s.json
+            for k in originalimage thumbnail; do
+              u=$(python3 -c "import json;d=json.load(open('s.json'));print(d.get('$k',{}).get('source',''))")
+              [ -n "$u" ] && { ext="${u##*.}"; ext="${ext%%\?*}"; c=$(curl -sSL -A "$UA" -o "images/fetched/wp-$p-$k.$ext" -w "%{http_code} %{size_download}" "$u"); echo "wp-$p-$k.$ext $c $u" >> $M; }
+            done
+          done
+          for d in iitd.ac.in home.iitd.ac.in uic.edu ibm.com research.ibm.com; do
+            n=${d//./_}
+            c=$(curl -sSL -A "$UA" -o "images/fetched/s2-$n.png" -w "%{http_code} %{size_download}" "https://www.google.com/s2/favicons?domain=$d&sz=256"); echo "s2-$n.png $c" >> $M
+          done
+          cat $M
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images
+          git commit -m "Fetch logos" || echo none
+          git push
