@@ -1,0 +1,25 @@
+name: Fetch images from old Google Site
+on:
+  push:
+    paths: [".github/workflows/fetch-images.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download images
+        run: |
+          mkdir -p images
+          curl -fsSL -o images/profile.jpg "https://sites.google.com/sitesv-images-rt/AMxu72srSNlY7RhznmDGNrLqohmWk3Mu_91oLIi2T7k_WRAtlj_d8KaV5T8HtSltFgwR6EVK7y8jfu3ftvfeu-4SN0uo9bNhlFNT-oJ7xe18Cz26tb8dh2uS-LreTwpQ4o2FCUKjncy2jFpU5jdurK8T9rIDxqt2_Sw8w-lmnB9cwogiXocBbeg7-vsXoR8ZTn75J3jrhkIvMhmEAEbn9A3jULzpVEv-aRsQclpALG6Zlxs=w1280"
+          curl -fsSL -o images/pointcloud.jpg "https://sites.google.com/sitesv-images-rt/AMxu72tyghnPFi19v3J1zv3KOs787uVSTTUm24BMtvASMxrpurExZdKwkSu5t5VH9MSNLYqT6j6Am2Z1ioP3wqVbD-6A9xbrWOJOjItBk5VRQPnhrW3dPmzfZFDT0QAHs0fUFWTj68sC1ZxsZ9LBZHYQUKC_yJexM6EWKPY2JaOk31ratL_4V6tYJ7sex6etdhRUdb5z9ZwSsEVpgIqr=w1280"
+          file images/*
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images
+          git commit -m "Add images from old Google Site" || echo "nothing to commit"
+          git push
