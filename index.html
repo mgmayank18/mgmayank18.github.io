@@ -202,6 +202,7 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .paper h3 a:hover{color:var(--accent);}
 .stats{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;margin-top:.5rem;}
 .stats div{display:grid;}
+.stats small{flex-basis:100%;font-size:var(--fs-xs);color:var(--muted);}
 .stats b{font:700 clamp(1.8rem,1.3rem + 1.6vw,2.6rem)/1 var(--serif);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
 .stats span{font-size:var(--fs-xs);color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-top:.35rem;}
 .cites{margin-left:.5rem;font:500 var(--fs-xs)/1 var(--mono);color:var(--muted);}
@@ -604,7 +605,7 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
     box.innerHTML = '<div><b>' + d.citations + '</b><span>Citations</span></div>' +
       '<div><b>' + d.h_index + '</b><span>h-index</span></div>' +
       (d.i10_index != null ? '<div><b>' + d.i10_index + '</b><span>i10-index</span></div>' : '');
-    box.title = 'Google Scholar, updated ' + d.updated;
+    box.innerHTML += '<small>' + (d.source || 'Google Scholar') + ' · updated ' + d.updated + '</small>';
     box.hidden = false;
     var papers = d.papers || {};
     document.querySelectorAll('.paper h3 a, .feature h3').forEach(function(a){
