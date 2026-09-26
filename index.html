@@ -281,16 +281,30 @@ section.block.beyond{padding-top:var(--space-4);}
   .big-count{flex-direction:column;align-items:flex-start;position:sticky;top:110px;}
 }
 @media (max-width: 560px){
-  .site-header .container{flex-direction:column;align-items:flex-start;gap:0;padding-block:10px 4px;min-height:0;}
-  .nav{width:100%;}
-  .hero{padding-top:calc(96px + 2rem);}
-  .actions{grid-template-columns:repeat(3,1fr);gap:.5rem;}
+  /* Slim one-row header: the page is short enough to scroll, so the section nav hides */
+  .site-header .container{min-height:52px;}
+  .nav{display:none;}
+  section.block{scroll-margin-top:60px;}
+  .hero{padding-top:calc(52px + 2.25rem);}
+  /* Photo sits beside the name only; tagline and prose run full width below */
+  .portrait{width:104px;margin:0 1rem .75rem 0;border-radius:12px;}
+  .hero h1{font-size:2.35rem;padding-top:.6rem;}
+  .hero .tagline{clear:left;margin-top:0;padding-top:.25rem;font-size:1.05rem;color:var(--ink);}
+  .actions{grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:var(--space-3);}
   .actions .btn{padding:.9rem .5rem;font-size:var(--fs-xs);}
-  .actions .btn.primary{grid-column:1 / -1;}
-  .patent-list li{flex-direction:column;gap:.2rem;}
-  .pn{text-align:left;}
+  .actions .btn.primary{grid-column:1 / -1;font-size:var(--fs-sm);}
+  .long{display:none;}
+  /* Experience: title, org, years stacked the same way on every row */
+  .role-item{align-items:start;}
+  .role-top{flex-direction:column;align-items:flex-start;gap:0;}
   .role-item h3 .org{display:block;font-size:var(--fs-sm);}
   .role-item h3 .org::before{content:none;}
+  .block-head{margin-bottom:var(--space-3);}
+  .feature .eyebrow{letter-spacing:.06em;}
+  .patent-list li{flex-direction:column;gap:.2rem;}
+  .pn{text-align:left;}
+  .cards .card:first-child h3{font-size:var(--fs-md);}
+  .cards .card:first-child .card-body{padding:var(--space-3);}
 }
 
 /* Reduced motion: everything visible, nothing moves */
@@ -342,7 +356,7 @@ section.block.beyond{padding-top:var(--space-4);}
         </a>
         <a class="btn" href="https://scholar.google.com/citations?user=CZzmgTQAAAAJ" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9 12 4l10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg>
-          Google Scholar
+          <span class="long">Google </span>Scholar
         </a>
         <a class="btn" href="https://www.linkedin.com/in/mayankguptaiitd/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>
@@ -417,7 +431,7 @@ section.block.beyond{padding-top:var(--space-4);}
         <div class="f-head">
           <div class="top">
             <span class="logo"><img src="images/logos/deepmind.png" alt="Google DeepMind"></span>
-            <span class="eyebrow">Latest · 2026 · Google DeepMind</span>
+            <span class="eyebrow"><span class="long">Latest · </span>2026 · Google DeepMind</span>
           </div>
           <h3>Gemma 4</h3>
         </div>
