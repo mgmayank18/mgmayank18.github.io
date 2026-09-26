@@ -234,10 +234,12 @@ section.block{padding-block:var(--space-5) 0;scroll-margin-top:72px;}
 .cards .card:first-child h3{font-size:var(--fs-lg);}
 
 /* Beyond */
-.beyond{display:grid;gap:.5rem;max-width:var(--measure);}
+.beyond{display:grid;gap:.5rem;}
+.beyond-text{display:grid;gap:.6rem;}
 section.block.beyond{padding-top:var(--space-4);}
 .beyond h2{font:600 var(--fs-base)/1.4 var(--sans);}
 .beyond p{color:var(--ink-2);font-size:var(--fs-sm);}
+@media (min-width: 760px){.beyond{grid-template-columns:minmax(0,1fr) minmax(0,3fr);gap:var(--space-4);align-items:baseline;}}
 
 /* Footer */
 .site-footer{margin-top:var(--space-5);background:var(--night);color:var(--night-muted);padding-block:var(--space-4) calc(var(--space-4) + env(safe-area-inset-bottom,0px));}
@@ -384,6 +386,7 @@ section.block.beyond{padding-top:var(--space-4);}
           <span class="logo"><img src="images/logos/iitd.png" alt="IIT Delhi"></span>
           <div>
             <div class="role-top"><h3>B.Tech. in Electrical Engineering <span class="org">IIT Delhi</span></h3><span class="when">2013 – 2017</span></div>
+            <p>Where my journey into ML started.</p>
           </div>
         </li>
         </ol>
@@ -531,7 +534,10 @@ section.block.beyond{padding-top:var(--space-4);}
     <!-- ================= Beyond work ================= -->
     <section class="block beyond" id="beyond" data-reveal>
       <h2>Beyond work</h2>
-      <p>At IIT Delhi I founded IIT Delhi OnAir, the institute's official broadcasting studio. Getting it approved and funded took two years, and I served as its first station manager, leading a team of 11.</p>
+      <div class="beyond-text">
+        <p>At IIT Delhi I founded IIT Delhi OnAir, the institute's official broadcasting studio. Getting it approved and funded took two years, and I served as its first station manager, leading a team of 11.</p>
+        <p>I enjoy videography and video editing. You can find some of our work on the <a href="https://www.youtube.com/@IITDOnAir" target="_blank" rel="noopener">IITD OnAir YouTube channel</a>.</p>
+      </div>
     </section>
 
   </div>
