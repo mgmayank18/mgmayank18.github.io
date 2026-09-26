@@ -1,0 +1,32 @@
+s2-google_com.png 200 image/png 6958 https://www.google.com/s2/favicons?domain=google.com&sz=256
+touch-google_com.png 404 text/html; charset=UTF-8 1581 https://google.com/apple-touch-icon.png
+touchwww-google_com.png 404 text/html; charset=UTF-8 1581 https://www.google.com/apple-touch-icon.png
+s2-verkada_com.png 200 image/png 780 https://www.google.com/s2/favicons?domain=verkada.com&sz=256
+touch-verkada_com.png 200 image/png 1391 https://verkada.com/apple-touch-icon.png
+touchwww-verkada_com.png 200 image/png 1391 https://www.verkada.com/apple-touch-icon.png
+s2-uber_com.png 200 image/png 6312 https://www.google.com/s2/favicons?domain=uber.com&sz=256
+touch-uber_com.png 404 text/html 2692 https://uber.com/apple-touch-icon.png
+touchwww-uber_com.png 404 text/html 2692 https://www.uber.com/apple-touch-icon.png
+s2-cmu_edu.png 200 image/png 431 https://www.google.com/s2/favicons?domain=cmu.edu&sz=256
+touch-cmu_edu.png 404 text/html 2625 https://cmu.edu/apple-touch-icon.png
+touchwww-cmu_edu.png 404 text/html 2625 https://www.cmu.edu/apple-touch-icon.png
+s2-xerox_com.png 200 image/png 2779 https://www.google.com/s2/favicons?domain=xerox.com&sz=256
+touch-xerox_com.png 200 image/png 1030 https://xerox.com/apple-touch-icon.png
+touchwww-xerox_com.png 200 image/png 1030 https://www.xerox.com/apple-touch-icon.png
+s2-iitd_ac_in.png 404 image/png 726 https://www.google.com/s2/favicons?domain=iitd.ac.in&sz=256
+touch-iitd_ac_in.png 404 text/html; charset=iso-8859-1 196 https://iitd.ac.in/apple-touch-icon.png
+touchwww-iitd_ac_in.png 404 text/html; charset=iso-8859-1 196 https://www.iitd.ac.in/apple-touch-icon.png
+s2-deepmind_google.png 200 image/png 8482 https://www.google.com/s2/favicons?domain=deepmind.google&sz=256
+touch-deepmind_google.png 404 text/html 194064 https://deepmind.google/apple-touch-icon.png
+touchwww-deepmind_google.png 404 text/html 194064 https://www.deepmind.google/apple-touch-icon.png
+s2-arxiv_org.png 200 image/png 7075 https://www.google.com/s2/favicons?domain=arxiv.org&sz=256
+touch-arxiv_org.png 404 text/html; charset=utf-8 7233 https://arxiv.org/apple-touch-icon.png
+touchwww-arxiv_org.png 404 text/html; charset=utf-8 7233 https://www.arxiv.org/apple-touch-icon.png
+yt-NPzpLOPuHIg-max.jpg 404 image/jpeg 1097 https://img.youtube.com/vi/NPzpLOPuHIg/maxresdefault.jpg
+yt-NPzpLOPuHIg-hq.jpg 200 image/jpeg 7957 https://img.youtube.com/vi/NPzpLOPuHIg/hqdefault.jpg
+yt-cwbkhtCsKnY-max.jpg 404 image/jpeg 1097 https://img.youtube.com/vi/cwbkhtCsKnY/maxresdefault.jpg
+yt-cwbkhtCsKnY-hq.jpg 200 image/jpeg 4663 https://img.youtube.com/vi/cwbkhtCsKnY/hqdefault.jpg
+yt-20YfxLH_APE-max.jpg 200 image/jpeg 118121 https://img.youtube.com/vi/20YfxLH_APE/maxresdefault.jpg
+yt-20YfxLH_APE-hq.jpg 200 image/jpeg 29976 https://img.youtube.com/vi/20YfxLH_APE/hqdefault.jpg
+yt-GGFF5BwOInc-max.jpg 200 image/jpeg 169344 https://img.youtube.com/vi/GGFF5BwOInc/maxresdefault.jpg
+yt-GGFF5BwOInc-hq.jpg 200 image/jpeg 18207 https://img.youtube.com/vi/GGFF5BwOInc/hqdefault.jpg
