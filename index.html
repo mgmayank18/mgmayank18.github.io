@@ -644,6 +644,7 @@ section.block.beyond{padding-top:var(--space-4);}
   var timeline = document.getElementById('timeline');
   var px = Array.prototype.slice.call(document.querySelectorAll('.thumb img.px'));
   var roles = Array.prototype.slice.call(document.querySelectorAll('.role-item'));
+  var first = true;
 
   /* Rail runs exactly from the first logo's centre to the last one's (layout offsets ignore transforms) */
   function layoutRail(){
@@ -671,9 +672,13 @@ section.block.beyond{padding-top:var(--space-4);}
     }
 
     roles.forEach(function(li){
+      if (li._settled) return;
       var top = timeline.getBoundingClientRect().top + li.offsetTop;
+      /* Rows already on screen when the page opens start settled; only rows below the fold swing in */
+      if (first && top < vh){ li._settled = true; li.style.setProperty('--q', 0); return; }
       li.style.setProperty('--q', (1 - clamp((vh * 0.98 - top) / (vh * 0.28))).toFixed(3));
     });
+    first = false;
 
     px.forEach(function(img){
       var b = img.parentNode.getBoundingClientRect();
