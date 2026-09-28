@@ -1,0 +1,1 @@
+href="/themes/custom/cmu_base/favicon.ico"
