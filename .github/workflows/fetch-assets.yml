@@ -1,0 +1,25 @@
+name: fetch-assets
+on: push
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p cand
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36"
+          get(){ curl -sSL -A "$UA" -m 30 -o "cand/$1" "$2" || true; }
+          get cmu-seal.svg "https://en.wikipedia.org/wiki/Special:FilePath/Carnegie_Mellon_University_seal.svg"
+          get cmu-seal-c.svg "https://commons.wikimedia.org/wiki/Special:FilePath/Carnegie_Mellon_University_seal.svg"
+          get cmu-wordmark.svg "https://commons.wikimedia.org/wiki/Special:FilePath/Carnegie_Mellon_wordmark.svg"
+          get cmu-wordmark2.svg "https://en.wikipedia.org/wiki/Special:FilePath/Carnegie_Mellon_wordmark.svg"
+          get cmu-fav256.png "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.cmu.edu&size=256"
+          get cmu-apple.png "https://www.cmu.edu/apple-touch-icon.png"
+          get cmu-home.html "https://www.cmu.edu/"
+          grep -oE '(src|href)="[^"]*(logo|wordmark|icon)[^"]*"' cand/cmu-home.html | head -30 > cand/cmu-home-logos.txt || true
+          ls -la cand; file cand/*
+      - run: |
+          git config user.name Claude; git config user.email noreply@anthropic.com
+          git add cand; git commit -m "fetched candidates"; git push
